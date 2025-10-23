@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace EurekaMovieBE.Options
+﻿namespace EurekaMovieBE.Options
 {
     public class DbSettingsOptions
     {

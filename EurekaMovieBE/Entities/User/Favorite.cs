@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace EurekaMovieBE.Entities.User
+﻿namespace EurekaMovieBE.Entities.User
 {
     public class Favorite
     {

@@ -1,8 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace EurekaMovieBE.Entities.Tmdb;
+﻿namespace EurekaMovieBE.Entities.Tmdb;
 
 public class Movie : TmdbBase
 {

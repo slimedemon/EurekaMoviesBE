@@ -1,12 +1,4 @@
-﻿using EurekaMovieBE.Entities.Tmdb;
-using EurekaMovieBE.Options;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using MongoDB.EntityFrameworkCore.Extensions;
-using System.Collections;
-
-namespace EurekaMovieBE.Data
+﻿namespace EurekaMovieBE.Data
 {
     public class TmdbDbContext: DbContext
     {

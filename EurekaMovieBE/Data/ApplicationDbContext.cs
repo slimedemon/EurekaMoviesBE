@@ -1,12 +1,4 @@
-﻿using EurekaMovieBE.Data.Configurations;
-using EurekaMovieBE.Entities.Auth;
-using EurekaMovieBE.Entities.User;
-using EurekaMovieBE.Options;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-
-namespace EurekaMovieBE.Data
+﻿namespace EurekaMovieBE.Data
 {
     public class ApplicationDbContext: IdentityDbContext<User>
     {

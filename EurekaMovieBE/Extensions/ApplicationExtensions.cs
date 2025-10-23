@@ -1,8 +1,4 @@
-﻿using EurekaMovieBE.Data;
-using EurekaMovieBE.Options;
-using Microsoft.EntityFrameworkCore;
-
-namespace EurekaMovieBE.Extensions
+﻿namespace EurekaMovieBE.Extensions
 {
     public static class ApplicationExtensions
     {

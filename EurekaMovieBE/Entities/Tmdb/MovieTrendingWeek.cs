@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-
-namespace EurekaMovieBE.Entities.Tmdb
+﻿namespace EurekaMovieBE.Entities.Tmdb
 {
     public class MovieTrendingWeek: TmdbBase
     {

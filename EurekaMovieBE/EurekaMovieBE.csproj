@@ -8,8 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Persistence\Repositories\User\Interfaces\" />
-    <Folder Include="Persistence\Repositories\User\Implements\" />
+    <Folder Include="Persistence\Repositories\Application\Implements\" />
     <Folder Include="Persistence\UnitOfWorks\" />
   </ItemGroup>
 

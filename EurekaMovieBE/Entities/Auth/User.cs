@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace EurekaMovieBE.Entities.Auth
+﻿namespace EurekaMovieBE.Entities.Auth
 {
     public class User : IdentityUser
     {

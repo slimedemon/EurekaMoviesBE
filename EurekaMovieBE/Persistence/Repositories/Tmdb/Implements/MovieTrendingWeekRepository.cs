@@ -1,8 +1,4 @@
-﻿using EurekaMovieBE.Data;
-using EurekaMovieBE.Entities.Tmdb;
-using EurekaMovieBE.Persistence.Repositories.Tmdb.Interfaces;
-
-namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
+﻿namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
 {
     public class MovieTrendingWeekRepository : MongoGenericRepository<MovieTrendingWeek>, IMovieTrendingWeekRepository
     {

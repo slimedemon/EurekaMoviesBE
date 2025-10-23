@@ -1,10 +1,4 @@
-﻿using EurekaMovieBE.Data;
-using EurekaMovieBE.Entities.Tmdb;
-using EurekaMovieBE.Persistence.Repositories.Tmdb.Interfaces;
-using MongoDB.Driver;
-using System.Linq.Expressions;
-
-namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
+﻿namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
 {
     public class MongoGenericRepository<T> : IMongoGenericRepository<T> where T : TmdbBase
     {
