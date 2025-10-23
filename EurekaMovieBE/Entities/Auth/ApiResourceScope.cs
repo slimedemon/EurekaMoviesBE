@@ -5,5 +5,7 @@
         public int Id { get; set; }
         public string Scope { get; set; } = default!;
         public int ApiResourceId { get; set; }
+
+        public virtual ApiResource ApiResource { get; set; } = default!;
     }
 }

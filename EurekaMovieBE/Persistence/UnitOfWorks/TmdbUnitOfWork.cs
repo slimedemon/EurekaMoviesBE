@@ -3,7 +3,7 @@ using EurekaMovieBE.Persistence.Repositories.Tmdb.Implements;
 
 namespace EurekaMovieBE.Persistence.UnitOfWorks
 {
-    public class TmdbUnitOfWork : ITmdbUnitOfWork, IDisposable
+    public class TmdbUnitOfWork : ITmdbUnitOfWork
     {
         private readonly TmdbDbContext _context;
 

@@ -1,4 +1,6 @@
-﻿namespace EurekaMovieBE.Extensions
+﻿
+
+namespace EurekaMovieBE.Extensions
 {
     public static class ApplicationExtensions
     {
@@ -18,6 +20,18 @@
                         databaseOptions?.MongoDbName ?? throw new InvalidOperationException("MongoDbName is not configured"));
                 });
 
+            return services;
+        }
+
+        public static IServiceCollection AddServices(this IServiceCollection services)
+        { 
+            return services;
+        }
+
+        public static IServiceCollection AddUnitOfWorks(this IServiceCollection services)
+        {
+            services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
+            services.AddScoped<ITmdbUnitOfWork, TmdbUnitOfWork>();
             return services;
         }
     }

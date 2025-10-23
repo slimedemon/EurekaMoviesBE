@@ -13,6 +13,10 @@
             modelBuilder.HasDefaultSchema(DefaultSchema);
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new ApiResourceScopeConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientGrantTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientScopeConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientSecretConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new FavoriteConfiguration());
             modelBuilder.ApplyConfiguration(new WatchListConfiguration());

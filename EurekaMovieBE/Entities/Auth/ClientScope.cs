@@ -5,5 +5,7 @@
         public int Id { get; set; }
         public string Scope { get; set; } = default!;
         public int ClientId { get; set; }
+
+        public virtual Client Client { get; set; } = default!;
     }
 }
