@@ -26,7 +26,7 @@ public class People : TmdbBase
     public string Homepage { get; set; } = default!;
 
     [BsonElement("id")]
-    public int TmdbId { get; set; }
+    public int Id { get; set; }
 
     [BsonElement("imdb_id")]
     public string ImdbId { get; set; } = default!;

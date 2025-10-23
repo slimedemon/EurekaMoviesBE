@@ -1,0 +1,50 @@
+﻿using EurekaMovieBE.Entities.Tmdb;
+using EurekaMovieBE.Options;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using MongoDB.EntityFrameworkCore.Extensions;
+using System.Collections;
+
+namespace EurekaMovieBE.Data
+{
+    public class TmdbDbContext: DbContext
+    {
+        private readonly IMongoDatabase _database;
+
+        public TmdbDbContext(DbContextOptions<TmdbDbContext> options, IMongoClient mongoClient, IOptions<DbSettingsOptions> databaseOptions) : base(options)
+        {
+            _database = mongoClient.GetDatabase(databaseOptions.Value.MongoDbName);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Movie>().ToCollection("movies");
+            modelBuilder.Entity<MovieGenre>().ToCollection("movie_genres");
+            modelBuilder.Entity<MovieNowPlaying>().ToCollection("movies_now_playing");
+            modelBuilder.Entity<MoviePopular>().ToCollection("movies_popular");
+            modelBuilder.Entity<MovieTopRated>().ToCollection("movies_top_rated");
+            modelBuilder.Entity<MovieTrendingDay>().ToCollection("movies_trending_day");
+            modelBuilder.Entity<MovieTrendingWeek>().ToCollection("movies_trending_week");
+            modelBuilder.Entity<People>().ToCollection("peoples");
+            modelBuilder.Entity<Similar>().ToCollection("similars");
+        }
+
+        public IMongoCollection<T> GetCollection<T>(string collectionName)
+        { 
+            return _database.GetCollection<T>(collectionName);
+        }
+
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<MovieGenre> MovieGenres { get; set; }
+        public DbSet<MovieNowPlaying> MovieNowPlayings { get; set; }
+        public DbSet<MoviePopular> MoviePopulars { get; set; }
+        public DbSet<MovieTopRated> MovieTopRateds { get; set; }
+        public DbSet<MovieTrendingDay> MovieTrendingDays { get; set; }
+        public DbSet<MovieTrendingWeek> MovieTrendingWeeks { get; set; }
+        public DbSet<People> Peoples { get; set; }
+        public DbSet<Similar> Similars { get; set; }
+    }
+}

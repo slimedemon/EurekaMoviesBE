@@ -1,3 +1,5 @@
+using EurekaMovieBE.Extensions;
+
 namespace EurekaMovieBE
 {
     public class Program
@@ -9,6 +11,8 @@ namespace EurekaMovieBE
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            builder.Services.AddCustomDbContexts(builder.Configuration);
 
             var app = builder.Build();
 
