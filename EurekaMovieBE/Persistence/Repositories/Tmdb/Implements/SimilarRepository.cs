@@ -2,7 +2,7 @@
 {
     public class SimilarRepository : MongoGenericRepository<Similar>, ISimilarRepository
     {
-        public SimilarRepository(TmdbDbContext context, string collectionName) : base(context, collectionName)
+        public SimilarRepository(TmdbDbContext context) : base(context)
         {
         }
     }

@@ -20,11 +20,11 @@
         }
 
         public DbSet<Client> Client { get; set; }
-        public DbSet<ClientGrantTypes> ClientGrantTypes { get; set; }
-        public DbSet<ClientSecrets> ClientSecrets { get; set; }
-        public DbSet<ClientScopes> ClientScopes { get; set; }
-        public DbSet<ApiResources> ApiResources { get; set; }
-        public DbSet<ApiResourceScopes> ApiResourceScopes { get; set; }
+        public DbSet<ClientGrantType> ClientGrantTypes { get; set; }
+        public DbSet<ClientSecret> ClientSecrets { get; set; }
+        public DbSet<ClientScope> ClientScopes { get; set; }
+        public DbSet<ApiResource> ApiResources { get; set; }
+        public DbSet<ApiResourceScope> ApiResourceScopes { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<Favorite> Favorite { get; set; }

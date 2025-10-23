@@ -2,7 +2,7 @@
 {
     public class MovieTopRatedRepository : MongoGenericRepository<MovieTopRated>, IMovieTopRatedRepository
     {
-        public MovieTopRatedRepository(TmdbDbContext context, string collectionName) : base(context, collectionName)
+        public MovieTopRatedRepository(TmdbDbContext context) : base(context)
         {
         }
     }

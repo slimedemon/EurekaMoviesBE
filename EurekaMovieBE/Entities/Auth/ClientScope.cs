@@ -1,9 +1,9 @@
 ﻿namespace EurekaMovieBE.Entities.Auth
 {
-    public class ApiResourceScopes
+    public class ClientScope
     {
         public int Id { get; set; }
         public string Scope { get; set; } = default!;
-        public int ApiResourceId { get; set; }
+        public int ClientId { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace EurekaMovieBE.Entities.Auth
 {
-    public class ClientGrantTypes
+    public class ClientGrantType
     {
         public int Id { get; set; }
         public string GrantType { get; set; } = default!;

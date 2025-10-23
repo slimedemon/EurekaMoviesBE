@@ -1,6 +1,6 @@
 ﻿namespace EurekaMovieBE.Entities.Auth
 {
-    public class ApiResources
+    public class ApiResource
     {
         public int Id { get; set; }
         public string Name { get; set; } = default!;

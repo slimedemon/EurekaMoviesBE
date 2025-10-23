@@ -1,17 +1,17 @@
 ﻿using System.Linq.Expressions;
 
-namespace EurekaMovieBE.Persistence.Repositories.User.Interfaces
+namespace EurekaMovieBE.Persistence.Repositories.Application.Interfaces
 {
-    public interface IGenericRepository<T>
+    public interface IGenericRepository<T> where T : class
     {
         IQueryable<T> GetAll();
-        Task<T> GetById(object id);
-        Task<bool> Add(T entity);
-        Task<bool> AddRange(List<T> entity);
-        bool Update(T entity);
-        bool Delete(T entity);
-        bool DeleteRange(List<T> entities);
+        Task<T?> GetByIdAsync(object id);
+        Task AddAsync(T entity);
+        Task AddRangeAsync(List<T> entity);
+        void Update(T entity);
+        void Delete(T entity);
+        void DeleteRange(List<T> entities);
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
-        Task RemoveRangeAsync(Expression<Func<T, bool>> expression);
+        void RemoveWithCondition(Expression<Func<T, bool>> expression);
     }
 }

@@ -1,0 +1,6 @@
+﻿namespace EurekaMovieBE.Persistence.Repositories.Application.Interfaces
+{
+    public interface IWatchListRepository : IGenericRepository<WatchList>
+    {
+    }
+}

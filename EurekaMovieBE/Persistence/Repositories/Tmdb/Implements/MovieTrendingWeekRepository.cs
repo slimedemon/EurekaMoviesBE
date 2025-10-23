@@ -2,7 +2,7 @@
 {
     public class MovieTrendingWeekRepository : MongoGenericRepository<MovieTrendingWeek>, IMovieTrendingWeekRepository
     {
-        public MovieTrendingWeekRepository(TmdbDbContext context, string collectionName) : base(context, collectionName)
+        public MovieTrendingWeekRepository(TmdbDbContext context) : base(context)
         {
         }
     }

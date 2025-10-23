@@ -1,14 +1,13 @@
 ﻿using MongoDB.Driver;
 namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Interfaces
 {
-    public interface IMongoGenericRepository<T>
+    public interface IMongoGenericRepository<T> where T : TmdbBase
     {
-        Task CreateAsync(T entity);
-        IFindFluent<T, T> GetAll();
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(long id);
-        IFindFluent<T, T> Where(Expression<Func<T, bool>> predicate);
-        IFindFluent<T, T> Where(FilterDefinition<T> filter);
-        Task<T> GetByIdAsync(long id);
+        Task AddAsync(T entity);
+        IQueryable<T> GetAll();
+        void Update(T entity);
+        void Delete(T entity);
+        IQueryable Where(Expression<Func<T, bool>> predicate);
+        Task<T?> GetByIdAsync(object id);
     }
 }

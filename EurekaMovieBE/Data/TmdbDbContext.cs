@@ -2,11 +2,8 @@
 {
     public class TmdbDbContext: DbContext
     {
-        private readonly IMongoDatabase _database;
-
-        public TmdbDbContext(DbContextOptions<TmdbDbContext> options, IMongoClient mongoClient, IOptions<DbSettingsOptions> databaseOptions) : base(options)
+        public TmdbDbContext(DbContextOptions<TmdbDbContext> options) : base(options)
         {
-            _database = mongoClient.GetDatabase(databaseOptions.Value.MongoDbName);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,11 +19,6 @@
             modelBuilder.Entity<MovieTrendingWeek>().ToCollection("movies_trending_week");
             modelBuilder.Entity<People>().ToCollection("peoples");
             modelBuilder.Entity<Similar>().ToCollection("similars");
-        }
-
-        public IMongoCollection<T> GetCollection<T>(string collectionName)
-        { 
-            return _database.GetCollection<T>(collectionName);
         }
 
         public DbSet<Movie> Movies { get; set; }

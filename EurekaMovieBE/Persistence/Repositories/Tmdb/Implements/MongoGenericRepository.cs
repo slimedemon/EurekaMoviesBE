@@ -1,49 +1,46 @@
-﻿namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
+﻿
+
+namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
 {
     public class MongoGenericRepository<T> : IMongoGenericRepository<T> where T : TmdbBase
     {
         private readonly TmdbDbContext _context;
-        private readonly IMongoCollection<T> _collection;
+        private readonly DbSet<T> _dbSet;
 
-        public MongoGenericRepository(TmdbDbContext context, string collectionName) 
+        public MongoGenericRepository(TmdbDbContext context) 
         {
             _context = context;
-            _collection = context.GetCollection<T>(collectionName);
+            _dbSet = _context.Set<T>();
         }
 
-        public async Task CreateAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            await _collection.InsertOneAsync(entity);
+            await _dbSet.AddAsync(entity);
         }
 
-        public async Task DeleteAsync(long id)
+        public void Delete(T entity)
         {
-            await _collection.DeleteOneAsync(e => e.TmdbId == id);
+            _dbSet.Remove(entity);
         }
 
-        public IFindFluent<T, T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return _collection.Find(FilterDefinition<T>.Empty);
+            return _dbSet;
         }
 
-        public async Task<T> GetByIdAsync(long id)
+        public async Task<T?> GetByIdAsync(object id)
         {
-            return await _collection.Find(e => e.TmdbId == id).FirstOrDefaultAsync();
+            return await _dbSet.FindAsync(id);
         }
 
-        public async Task UpdateAsync(T entity)
+        public void Update(T entity)
         {
-            await _collection.ReplaceOneAsync(e => e.TmdbId == entity.TmdbId, entity);
+            _dbSet.Update(entity);
         }
 
-        public IFindFluent<T, T> Where(Expression<Func<T, bool>> predicate)
+        public IQueryable Where(Expression<Func<T, bool>> predicate)
         {
-            return _collection.Find(predicate);
-        }
-
-        public IFindFluent<T, T> Where(FilterDefinition<T> filter)
-        {
-            return _collection.Find(filter);
+            return _dbSet.Where(predicate);
         }
     }
 }

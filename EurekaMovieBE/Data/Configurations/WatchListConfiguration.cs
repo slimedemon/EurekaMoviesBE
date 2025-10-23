@@ -1,6 +1,4 @@
-﻿using EurekaMovieBE.Entities.User;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EurekaMovieBE.Data.Configurations
 {

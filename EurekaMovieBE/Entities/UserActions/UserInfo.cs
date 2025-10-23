@@ -1,4 +1,4 @@
-﻿namespace EurekaMovieBE.Entities.User
+﻿namespace EurekaMovieBE.Entities.UserActions
 {
     public class UserInfo
     {

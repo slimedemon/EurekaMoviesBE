@@ -2,7 +2,7 @@
 {
     public class MoviePopularRepository : MongoGenericRepository<MoviePopular>, IMoviePopularRepository
     {
-        public MoviePopularRepository(TmdbDbContext context, string collectionName) : base(context, collectionName)
+        public MoviePopularRepository(TmdbDbContext context) : base(context)
         {
         }
     }
