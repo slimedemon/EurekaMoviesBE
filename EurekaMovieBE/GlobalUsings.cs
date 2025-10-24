@@ -19,6 +19,8 @@ global using EurekaMovieBE.Persistence.Repositories.Tmdb.Interfaces;
 global using EurekaMovieBE.Persistence.Repositories.Application.Interfaces;
 global using System.Linq.Expressions;
 global using EurekaMovieBE.Persistence.UnitOfWorks;
+global using EurekaMovieBE.Constants;
+global using EurekaMovieBE.Templates;
 
 
 
