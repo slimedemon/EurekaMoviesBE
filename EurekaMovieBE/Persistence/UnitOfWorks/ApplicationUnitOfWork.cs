@@ -7,12 +7,6 @@ namespace EurekaMovieBE.Persistence.UnitOfWorks
     {
         private readonly ApplicationDbContext _context;
         private IDbContextTransaction? _transaction = null;
-        public IApiResourceRepository ApiResource { get; }
-        public IApiResourceScopeRepository ApiResourceScope { get; }
-        public IClientRepository Client { get; }
-        public IClientGrantTypeRepository ClientGrantType { get; }
-        public IClientSecretRepository ClientSecret { get; }
-        public IClientScopeRepository ClientScope { get; }
         public IUserInfoRepository UserInfo { get; }
         public IUserRepository User { get; }
         public IFavoriteRepository Favorite { get; }
@@ -22,12 +16,6 @@ namespace EurekaMovieBE.Persistence.UnitOfWorks
         public ApplicationUnitOfWork(ApplicationDbContext context)
         { 
             _context= context;
-            ApiResource = new ApiResourceRepository(_context);
-            ApiResourceScope = new ApiResourceScopeRepository(_context);
-            Client = new ClientRepository(_context);
-            ClientGrantType = new ClientGrantTypeRepository(_context);
-            ClientSecret = new ClientSecretRepository(_context);
-            ClientScope = new ClientScopeRepository(_context);
             UserInfo = new UserInfoRepository(_context);
             User = new UserRepository(_context);
             Favorite = new FavoriteRepository(_context);

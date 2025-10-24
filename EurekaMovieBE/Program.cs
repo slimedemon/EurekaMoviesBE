@@ -14,6 +14,12 @@ namespace EurekaMovieBE
 
             builder.Services.AddCustomDbContexts(builder.Configuration);
 
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.AddCustomIdentityServer(builder.Configuration);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
