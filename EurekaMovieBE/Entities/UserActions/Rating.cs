@@ -5,7 +5,7 @@
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Index { get; set; }
-        public double Start { get; set; }
+        public double Star { get; set; }
         public string Comment { get; set; } = default!;
         public DateTime CreatedDate { get; set; }
         public long TmdbId { get; set; }

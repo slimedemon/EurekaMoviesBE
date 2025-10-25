@@ -7,7 +7,7 @@ namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Interfaces
         IQueryable<T> GetAll();
         void Update(T entity);
         void Delete(T entity);
-        IQueryable Where(Expression<Func<T, bool>> predicate);
+        IQueryable<T> Where(Expression<Func<T, bool>> predicate);
         Task<T?> GetByIdAsync(object id);
     }
 }

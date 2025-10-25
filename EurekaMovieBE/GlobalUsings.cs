@@ -21,6 +21,14 @@ global using System.Linq.Expressions;
 global using EurekaMovieBE.Persistence.UnitOfWorks;
 global using EurekaMovieBE.Constants;
 global using EurekaMovieBE.Templates;
+global using MediatR;
+global using EurekaMovieBE.Dtos;
+global using EurekaMovieBE.Dtos.Requests;
+global using EurekaMovieBE.Dtos.Responses;
+global using EurekaMovieBE.Enums;
+global using EurekaMovieBE.Extensions;
+global using EurekaMovieBE.HttpClientCustom;
+global using EurekaMovieBE.HttpContextCustom;
 
 
 

@@ -38,7 +38,7 @@ namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
             _dbSet.Update(entity);
         }
 
-        public IQueryable Where(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> Where(Expression<Func<T, bool>> predicate)
         {
             return _dbSet.Where(predicate);
         }

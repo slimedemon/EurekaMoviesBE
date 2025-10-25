@@ -1,0 +1,33 @@
+﻿using FluentValidation;
+
+namespace EurekaMovieBE.Features.Queries.WatchListQueries.GetWatchList;
+
+public class GetWatchListValidator : AbstractValidator<GetWatchListQuery>
+{
+    public GetWatchListValidator()
+    {
+        RuleFor(command => command)
+            .Cascade(CascadeMode.Stop)
+            .NotNull()
+            .NotEmpty()
+            .WithMessage("Command cannot be null or empty.");
+        
+        RuleFor(command => command.Payload)
+            .Cascade(CascadeMode.Stop)
+            .NotNull()
+            .NotEmpty()
+            .WithMessage("Payload cannot be null or empty.");
+        
+        RuleFor(command => command.Payload.PageNumber)
+            .Cascade(CascadeMode.Stop)
+            .NotNull()
+            .GreaterThan(0)
+            .WithMessage("Page number must be greater than 0.");
+        
+        RuleFor(command => command.Payload.MaxPerPage)
+            .Cascade(CascadeMode.Stop)
+            .NotNull()
+            .GreaterThan(0)
+            .WithMessage("Max per page must be greater than 0.");
+    }
+}
