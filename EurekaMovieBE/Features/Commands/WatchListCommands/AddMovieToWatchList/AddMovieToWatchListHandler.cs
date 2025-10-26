@@ -1,21 +1,13 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using EurekaMovieBE.Data.UserData;
-using EurekaMovieBE.Enums;
-using EurekaMovieBE.HttpContextCustom;
-using EurekaMovieBE.Dtos.Responses;
-using EurekaMovieBE.Persistence.UnitOfWork.Postgres;
-
-namespace EurekaMovieBE.Features.Commands.WatchListCommands.AddMovieToWatchList;
+﻿namespace EurekaMovieBE.Features.Commands.WatchListCommands.AddMovieToWatchList;
 
 public class AddMovieToWatchListHandler : IRequestHandler<AddMovieToWatchListCommand, AddMovieToWatchListResponse>
 {
-    private readonly IUnitOfRepository _unitOfRepository;
+    private readonly IApplicationUnitOfWork _unitOfRepository;
     private readonly ILogger<AddMovieToWatchListHandler> _logger;
     private readonly ICustomHttpContextAccessor _httpContextAccessor;
     public AddMovieToWatchListHandler
     (
-        IUnitOfRepository unitOfRepository, 
+        IApplicationUnitOfWork unitOfRepository, 
         ILogger<AddMovieToWatchListHandler> logger,
         ICustomHttpContextAccessor httpContextAccessor
     )
@@ -55,7 +47,7 @@ public class AddMovieToWatchListHandler : IRequestHandler<AddMovieToWatchListCom
                CreatedDate = DateTime.UtcNow
            };
            
-           await _unitOfRepository.WatchList.Add(watchList);
+           await _unitOfRepository.WatchList.AddAsync(watchList);
            await _unitOfRepository.CompleteAsync();
            
            response.Status = (int)ResponseStatusCode.Created;

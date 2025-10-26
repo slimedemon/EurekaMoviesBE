@@ -1,22 +1,13 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using EurekaMovieBE.Data.AuthData;
-using EurekaMovieBE.Data.UserData;
-using EurekaMovieBE.Enums;
-using EurekaMovieBE.Dtos.Responses;
-using EurekaMovieBE.Persistence.UnitOfWork.Postgres;
-
-namespace EurekaMovieBE.Features.Commands.UserCommands.Register;
+﻿namespace EurekaMovieBE.Features.Commands.UserCommands.Register;
 
 public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse>
 {
-    private readonly IUnitOfRepository _unitOfRepository;
+    private readonly IApplicationUnitOfWork _unitOfRepository;
     private readonly ILogger<RegisterHandler> _logger;
     private readonly UserManager<User> _userManager;
     public RegisterHandler
     (
-        IUnitOfRepository unitOfRepository,
+        IApplicationUnitOfWork unitOfRepository,
         ILogger<RegisterHandler> logger,
         UserManager<User> userManager
     )
@@ -75,7 +66,7 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
                 DisplayName = payload.DisplayName
             };
             
-            await _unitOfRepository.UserInfo.Add(userInfo);
+            await _unitOfRepository.UserInfo.AddAsync(userInfo);
             await _unitOfRepository.CompleteAsync();
             
             response.Status = (int)ResponseStatusCode.Created;

@@ -1,27 +1,19 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using EurekaMovieBE.Enums;
-using EurekaMovieBE.Extensions;
-using EurekaMovieBE.Features.Commands.UserCommands.Login;
+﻿using EurekaMovieBE.Features.Commands.UserCommands.Login;
 using EurekaMovieBE.Features.Commands.UserCommands.Register;
-using EurekaMovieBE.Dtos.Requests;
-using EurekaMovieBE.Dtos.Responses;
-using EurekaMovieBE.Persistence.UnitOfWork.Postgres;
-using EurekaMovieBE.Services.GoogleService;
 
 namespace EurekaMovieBE.Features.Commands.UserCommands.LoginSocial;
 
 public class LoginSocialHandler : IRequestHandler<LoginSocialCommand, LoginSocialResponse>
 {
     private readonly ILogger<LoginSocialHandler> _logger;
-    private readonly IUnitOfRepository _unitOfRepository;
+    private readonly IApplicationUnitOfWork _unitOfRepository;
     private readonly IGoogleService _googleService;
     private readonly IMediator _mediator;
 
     public LoginSocialHandler
     (
         ILogger<LoginSocialHandler> logger,
-        IUnitOfRepository unitOfRepository,
+        IApplicationUnitOfWork unitOfRepository,
         IGoogleService googleService,
         IMediator mediator
     )

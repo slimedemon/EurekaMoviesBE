@@ -1,20 +1,13 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using EurekaMovieBE.Enums;
-using EurekaMovieBE.HttpContextCustom;
-using EurekaMovieBE.Dtos.Responses;
-using EurekaMovieBE.Persistence.UnitOfWork.Postgres;
-
-namespace EurekaMovieBE.Features.Commands.WatchListCommands.RemoveMovieFromWatchList;
+﻿namespace EurekaMovieBE.Features.Commands.WatchListCommands.RemoveMovieFromWatchList;
 
 public class RemoveMovieFromWatchListHandler : IRequestHandler<RemoveMovieFromWatchListCommand, RemoveMovieFromWatchListResponse>
 {
-    private readonly IUnitOfRepository _unitOfRepository;
+    private readonly IApplicationUnitOfWork _unitOfRepository;
     private readonly ILogger<RemoveMovieFromWatchListHandler> _logger;
     private readonly ICustomHttpContextAccessor _httpContextAccessor;
     public RemoveMovieFromWatchListHandler
     (
-        IUnitOfRepository unitOfRepository, 
+        IApplicationUnitOfWork unitOfRepository, 
         ILogger<RemoveMovieFromWatchListHandler> logger,
         ICustomHttpContextAccessor httpContextAccessor
     )

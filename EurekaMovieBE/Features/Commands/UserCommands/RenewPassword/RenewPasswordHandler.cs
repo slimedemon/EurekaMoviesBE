@@ -1,26 +1,16 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using EurekaMovieBE.Data.AuthData;
-using EurekaMovieBE.Enums;
-using EurekaMovieBE.Dtos.Dtos;
-using EurekaMovieBE.Dtos.Responses;
-using EurekaMovieBE.Persistence.UnitOfWork.Postgres;
-using EurekaMovieBE.Services.MemoryCache;
-
-namespace EurekaMovieBE.Features.Commands.UserCommands.RenewPassword;
+﻿namespace EurekaMovieBE.Features.Commands.UserCommands.RenewPassword;
 
 public class RenewPasswordHandler : IRequestHandler<RenewPasswordCommand, RenewPasswordResponse>
 {
     private readonly ILogger<RenewPasswordHandler> _logger;
     private readonly UserManager<User> _userManager;
-    private readonly IUnitOfRepository _unitOfRepository;
+    private readonly IApplicationUnitOfWork _unitOfRepository;
     private readonly IMemoryCacheService _memoryCacheService;
     public RenewPasswordHandler
     (
         ILogger<RenewPasswordHandler> logger,
         UserManager<User> userManager,
-        IUnitOfRepository unitOfRepository,
+        IApplicationUnitOfWork unitOfRepository,
         IMemoryCacheService memoryCacheService
     )
     {
@@ -41,7 +31,7 @@ public class RenewPasswordHandler : IRequestHandler<RenewPasswordCommand, RenewP
         try
         {
             var user = await _unitOfRepository.User
-                .Where(u => u.UserName.ToLower().Equals(payload.Email.ToLower()))
+                .Where(u => u.UserName!.ToLower().Equals(payload.Email.ToLower()))
                 .FirstOrDefaultAsync(cancellationToken);
             if (user is null)
             {

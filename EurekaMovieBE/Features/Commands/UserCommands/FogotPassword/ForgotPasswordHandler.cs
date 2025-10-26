@@ -1,6 +1,4 @@
-﻿using EurekaMovieBE.Services;
-
-namespace EurekaMovieBE.Features.Commands.UserCommands.FogotPassword;
+﻿namespace EurekaMovieBE.Features.Commands.UserCommands.FogotPassword;
 
 public class ForgotPasswordHandler : IRequestHandler<ForgotPasswordCommand, ForgotPasswordResponse>
 {
@@ -59,7 +57,7 @@ public class ForgotPasswordHandler : IRequestHandler<ForgotPasswordCommand, Forg
                 
                 resetDto = new ResetPasswordDto
                 {
-                    Email = user.UserName,
+                    Email = user.UserName!,
                     ResetToken = token
                 };
             

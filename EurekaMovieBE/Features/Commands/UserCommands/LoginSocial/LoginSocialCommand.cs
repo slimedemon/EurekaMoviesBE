@@ -1,8 +1,4 @@
-﻿using MediatR;
-using EurekaMovieBE.Dtos.Requests;
-using EurekaMovieBE.Dtos.Responses;
-
-namespace EurekaMovieBE.Features.Commands.UserCommands.LoginSocial;
+﻿namespace EurekaMovieBE.Features.Commands.UserCommands.LoginSocial;
 
 public class LoginSocialCommand : IRequest<LoginSocialResponse>
 {

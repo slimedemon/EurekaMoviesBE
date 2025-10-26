@@ -1,10 +1,4 @@
 ﻿using MediatR.Pipeline;
-using Microsoft.AspNetCore.Identity;
-using EurekaMovieBE.Data.AuthData;
-using EurekaMovieBE.Enums;
-using EurekaMovieBE.Dtos.Responses;
-using EurekaMovieBE.Persistence.UnitOfWork.Postgres;
-using EurekaMovieBE.Services.MailSender;
 
 namespace EurekaMovieBE.Features.Commands.UserCommands.Register.PostProcessor;
 
@@ -13,13 +7,13 @@ public class AfterRegister : IRequestPostProcessor<RegisterCommand, RegisterResp
     private readonly IMailSenderService _mailSenderService;
     private readonly UserManager<User> _userManager;
     private readonly ILogger<AfterRegister> _logger;
-    private readonly IUnitOfRepository _unitOfRepository;
+    private readonly IApplicationUnitOfWork _unitOfRepository;
     public AfterRegister
     (
         IMailSenderService mailSenderService, 
         UserManager<User> userManager,
         ILogger<AfterRegister> logger,
-        IUnitOfRepository unitOfRepository
+        IApplicationUnitOfWork unitOfRepository
     )
     {
         _mailSenderService = mailSenderService;

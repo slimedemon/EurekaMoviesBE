@@ -1,33 +1,29 @@
 ﻿using System.Net;
 using Duende.IdentityModel.Client;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using EurekaMovieBE.Data.AuthData;
-using EurekaMovieBE.Enums;
-using EurekaMovieBE.Dtos.Responses;
-using EurekaMovieBE.Options;
-using EurekaMovieBE.Persistence.UnitOfWork.Postgres;
+using Duende.IdentityServer.EntityFramework.Entities;
+using Duende.IdentityServer.EntityFramework.Interfaces;
 
 namespace EurekaMovieBE.Features.Commands.UserCommands.Login;
 
 public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse>
 {
-    private readonly IUnitOfRepository _unitOfRepository;
+    private readonly IApplicationUnitOfWork _unitOfRepository;
+    private readonly IConfigurationDbContext _configurationDbContext;
     private readonly UserManager<User> _userManager;
     private readonly ILogger<LoginHandler> _logger;
     private readonly AuthenticationOptions _authenticationOptions;
 
     public LoginHandler
     (
-        IUnitOfRepository unitOfRepository, 
+        IApplicationUnitOfWork unitOfRepository,
+        IConfigurationDbContext configurationDbContext, 
         UserManager<User> userManager, 
         ILogger<LoginHandler> logger, 
         IOptions<AuthenticationOptions> authenticationOptions
     )
     {
         _unitOfRepository = unitOfRepository;
+        _configurationDbContext = configurationDbContext;
         _userManager = userManager;
         _logger = logger;
         _authenticationOptions = authenticationOptions.Value;
@@ -43,9 +39,10 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse>
             var payload = request.Payload;
             var user = await _unitOfRepository.User
                 .Where(u => 
-                    u.NormalizedUserName.Equals(payload.Email.ToUpper())
+                    u.NormalizedUserName!.Equals(payload.Email.ToUpper())
                     && !u.IsDeleted)
                 .FirstOrDefaultAsync(cancellationToken);
+
             if (user == null)
             {
                 _logger.LogWarning($"{functionName} => User not found or deleted");
@@ -62,27 +59,27 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse>
                 return loginResponse;
             }
             
-            var client = await _unitOfRepository.Client
+            var client = await _configurationDbContext.Clients
                 .Where(cl => cl.Id == user.ClientId)
-                .Select(client => new Client
+                .Include(cl => cl.ClientSecrets)
+                .Include(cl => cl.AllowedScopes)
+                .Select(client => new
                 {
                     Id = client.Id,
-                    ClientId = client.ClientId
+                    ClientId = client.ClientId,
+                    Secrets = client.ClientSecrets.Select(cs => cs.Value),
+                    Scopes = client.AllowedScopes.Select(cs => cs.Scope)
                 })
                 .FirstOrDefaultAsync(cancellationToken);
-            
-            var clientSecret = await _unitOfRepository.ClientSecret
-                .Where(cs => cs.ClientId == client.Id)
-                .Select(cs => cs.Secrets)
-                .FirstOrDefaultAsync(cancellationToken);
-            
-            var scopes = await _unitOfRepository.ClientScope
-                .Where(p => p.ClientId == client.Id)
-                .Select(p => p.Scope)
-                .ToListAsync(cancellationToken);
+
+            if (client == null)
+            { 
+                throw new InvalidOperationException(" Client configuration not found");
+            }
+     
             var requestScopes = "";
             
-            foreach (var scope in scopes)
+            foreach (var scope in client.Scopes)
             {
                 requestScopes += " " + scope;
             }
@@ -92,7 +89,7 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse>
             {
                 Address = $"{_authenticationOptions.Authority}/connect/token",
                 ClientId = client.ClientId,
-                ClientSecret = clientSecret,
+                ClientSecret = client.Secrets.FirstOrDefault(),
                 Scope = requestScopes.Trim(),
                 UserName = payload.Email,
                 Password = payload.Password

@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using EurekaMovieBE.Dtos.Responses.AIService;
 
 namespace EurekaMovieBE.Dtos.Responses;
 

@@ -1,7 +1,4 @@
-﻿using MediatR;
-using EurekaMovieBE.Dtos.Responses;
-
-namespace EurekaMovieBE.Features.Commands.WatchListCommands.RemoveMovieFromWatchList;
+﻿namespace EurekaMovieBE.Features.Commands.WatchListCommands.RemoveMovieFromWatchList;
 
 public class RemoveMovieFromWatchListCommand : IRequest<RemoveMovieFromWatchListResponse>
 {

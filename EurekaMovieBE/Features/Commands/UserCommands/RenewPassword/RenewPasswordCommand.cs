@@ -1,8 +1,4 @@
-﻿using MediatR;
-using EurekaMovieBE.Dtos.Requests;
-using EurekaMovieBE.Dtos.Responses;
-
-namespace EurekaMovieBE.Features.Commands.UserCommands.RenewPassword;
+﻿namespace EurekaMovieBE.Features.Commands.UserCommands.RenewPassword;
 
 public class RenewPasswordCommand : IRequest<RenewPasswordResponse>
 {
