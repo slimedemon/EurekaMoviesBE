@@ -29,6 +29,7 @@ global using EurekaMovieBE.Enums;
 global using EurekaMovieBE.Extensions;
 global using EurekaMovieBE.HttpClientCustom;
 global using EurekaMovieBE.HttpContextCustom;
+global using EurekaMovieBE.Services;
 
 
 

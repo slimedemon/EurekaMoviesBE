@@ -1,8 +1,4 @@
-﻿using MediatR;
-using EurekaMovieBE.Dtos.Requests;
-using EurekaMovieBE.Dtos.Responses;
-
-namespace EurekaMovieBE.Features.Queries.RecommendationQueries.RAGSearch;
+﻿namespace EurekaMovieBE.Features.Queries.RecommendationQueries.RAGSearch;
 
 public class RAGSearchQuery : IRequest<RAGSearchResponse>
 {

@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
-namespace EurekaMovieBE.Dtos.Responses.AIService;
+﻿namespace EurekaMovieBE.Dtos.Responses;
 
 public class AIGetNavigationResponse : AIBaseResponse<AIGetNavigationData>
 {

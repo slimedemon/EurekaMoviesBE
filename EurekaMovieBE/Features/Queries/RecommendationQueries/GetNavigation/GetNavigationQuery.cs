@@ -1,7 +1,4 @@
-﻿using MediatR;
-using EurekaMovieBE.Dtos.Responses;
-
-namespace EurekaMovieBE.Features.Queries.RecommendationQueries.GetNavigation;
+﻿namespace EurekaMovieBE.Features.Queries.RecommendationQueries.GetNavigation;
 
 public class GetNavigationQuery : IRequest<GetNavigationResponse>
 {
