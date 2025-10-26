@@ -13,6 +13,12 @@ namespace EurekaMovieBE
             var builder = WebApplication.CreateBuilder(args);
 
             var httpClientConfig = builder.Configuration.GetSection(HttpClientOption.OptionName).Get<HttpClientOption>();
+
+            if(httpClientConfig == null )
+            {
+                throw new Exception("HttpClientConfig is not configured properly.");
+            }
+
             builder.Services.Configure<LLMServiceOption>(builder.Configuration.GetSection(LLMServiceOption.OptionName));
             builder.Services.Configure<DbSettingsOptions>(builder.Configuration.GetSection(DbSettingsOptions.OptionName));
             builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.OptionName));

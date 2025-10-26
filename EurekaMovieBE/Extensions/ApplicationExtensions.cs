@@ -1,7 +1,4 @@
-﻿
-
-
-using Duende.IdentityServer;
+﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Services;
 using EurekaMovieBE.Middlewares;
 using EurekaMovieBE.Services.DuendeServices;
@@ -81,6 +78,7 @@ namespace EurekaMovieBE.Extensions
 
         public static IServiceCollection AddAuthenticationConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            var authenticationOptions = configuration.GetSection(AuthenticationOptions.OptionName).Get<AuthenticationOptions>();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -88,7 +86,7 @@ namespace EurekaMovieBE.Extensions
             })
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, option =>
                 {
-                    option.Authority = configuration["IdentityServer:Authority"] ?? throw new InvalidOperationException("Authority is not configured");
+                    option.Authority = authenticationOptions?.Authority ?? throw new InvalidOperationException("Authority is not configured");
                     option.RequireHttpsMetadata = false;
                     option.TokenValidationParameters = new TokenValidationParameters
                     {
