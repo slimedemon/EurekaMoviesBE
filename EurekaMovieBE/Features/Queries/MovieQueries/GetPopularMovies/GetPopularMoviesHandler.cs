@@ -14,26 +14,26 @@ public class GetPopularMoviesHandler : IRequestHandler<GetPopularMoviesQuery, Ge
         _unitOfRepository = unitOfRepository;
         _logger = logger;
     }
-    
+
     public async Task<GetPopularMoviesResponse> Handle(GetPopularMoviesQuery request, CancellationToken cancellationToken)
     {
         var payload = request.Payload;
         const string functionName = $"{nameof(GetPopularMoviesHandler)} =>";
         _logger.LogInformation(functionName);
-        
-        var response = new GetPopularMoviesResponse{ Status = (int)ResponseStatusCode.Ok };
+
+        var response = new GetPopularMoviesResponse { Status = (int)ResponseStatusCode.Ok };
 
         try
         {
             var pagination = await _unitOfRepository.MoviePopular
                 .GetAll()
-                .OrderByDescending(m => m.Popularity)
+                .Sort(Builders<MoviePopular>.Sort.Descending(x => x.Popularity))
                 .ToListAsPageAsync(payload.PageNumber, payload.MaxPerPage, cancellationToken);
-           
+
             response.Data = pagination.Data;
             response.Paging = pagination.Paging;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _logger.LogError(ex, $"{functionName} Has error: {ex.Message}");
             response.ErrorMessage = "An error occurred";

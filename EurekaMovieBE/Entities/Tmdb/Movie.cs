@@ -270,7 +270,7 @@ public class Trailer
 
 public class CustomDateTimeSerializer : IBsonSerializer<DateTime>
 {
-    public Type ValueType => throw new NotImplementedException();
+    public Type ValueType => typeof(DateTime);
 
     public DateTime Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {

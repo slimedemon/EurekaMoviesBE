@@ -1,46 +1,49 @@
-﻿
-
-namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
+﻿namespace EurekaMovieBE.Persistence.Repositories.Tmdb.Implements
 {
     public class MongoGenericRepository<T> : IMongoGenericRepository<T> where T : TmdbBase
     {
         private readonly TmdbDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        private readonly IMongoCollection<T> _collection;
 
-        public MongoGenericRepository(TmdbDbContext context) 
+        public MongoGenericRepository(TmdbDbContext context, string collectionName)
         {
             _context = context;
-            _dbSet = _context.Set<T>();
+            _collection = _context.GetCollection<T>(collectionName);
         }
 
-        public async Task AddAsync(T entity)
+        public async Task CreateAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            await _collection.InsertOneAsync(entity);
         }
 
-        public void Delete(T entity)
+        public IFindFluent<T, T> GetAll()
         {
-            _dbSet.Remove(entity);
+            return _collection.Find(_ => true);
         }
 
-        public IQueryable<T> GetAll()
+        public async Task UpdateAsync(T entity)
         {
-            return _dbSet;
+            await _collection.ReplaceOneAsync(e => e.TmdbId == entity.TmdbId, entity);
         }
 
-        public async Task<T?> GetByIdAsync(object id)
+        public async Task DeleteAsync(long id)
         {
-            return await _dbSet.FindAsync(id);
+            await _collection.DeleteOneAsync(e => e.TmdbId == id);
         }
 
-        public void Update(T entity)
+        public IFindFluent<T, T> Where(Expression<Func<T, bool>> predicate)
         {
-            _dbSet.Update(entity);
+            return _collection.Find(predicate);
         }
 
-        public IQueryable<T> Where(Expression<Func<T, bool>> predicate)
+        public IFindFluent<T, T> Where(FilterDefinition<T> filter)
         {
-            return _dbSet.Where(predicate);
+            return _collection.Find(filter);
+        }
+
+        public Task<T> GetByIdAsync(long id)
+        {
+            return _collection.Find(e => e.TmdbId == id).FirstOrDefaultAsync();
         }
     }
 }

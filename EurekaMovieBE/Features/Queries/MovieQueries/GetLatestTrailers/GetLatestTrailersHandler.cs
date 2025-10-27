@@ -14,25 +14,28 @@ public class GetLatestTrailersHandler : IRequestHandler<GetLatestTrailersQuery, 
         _unitOfRepository = unitOfRepository;
         _logger = logger;
     }
-    
+
     public async Task<GetLatestTrailersResponse> Handle(GetLatestTrailersQuery request, CancellationToken cancellationToken)
     {
         var payload = request.Payload;
         const string functionName = $"{nameof(GetLatestTrailersHandler)} =>";
         _logger.LogInformation(functionName);
-        
-        var response = new GetLatestTrailersResponse{ Status = (int)ResponseStatusCode.Ok };
+
+        var response = new GetLatestTrailersResponse { Status = (int)ResponseStatusCode.Ok };
 
         try
         {
             var currentDate = DateTime.UtcNow;
-
+            var filter = Builders<Movie>.Filter.And(
+                Builders<Movie>.Filter.SizeGt(x => x.Trailers, 0),
+                Builders<Movie>.Filter.Not(
+                    Builders<Movie>.Filter.Eq(x => x.Status, "Released")
+                ),
+                Builders<Movie>.Filter.Gte(x => x.ReleaseDate, currentDate)
+            );
             var movies = await _unitOfRepository.Movie
-                .Where(x =>
-                    x.Trailers != null && x.Trailers.Count > 0 &&
-                    x.Status != "Released" &&
-                    x.ReleaseDate >= currentDate)
-                .OrderByDescending(x => x.ReleaseDate)
+                .Where(filter)
+                .Sort(Builders<Movie>.Sort.Descending(x => x.ReleaseDate))
                 .ToListAsync(cancellationToken);
 
             var latestTrailersData = movies
@@ -55,13 +58,13 @@ public class GetLatestTrailersHandler : IRequestHandler<GetLatestTrailersQuery, 
             {
                 return response;
             }
-            
+
             response.Data = latestTrailersData
                 .Skip((paging.PageNumber - 1) * paging.MaxPerPage)
                 .Take(paging.MaxPerPage)
                 .ToList();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _logger.LogError(ex, $"{functionName} Has error: {ex.Message}");
             response.ErrorMessage = "An error occurred";

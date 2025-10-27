@@ -28,15 +28,15 @@ namespace EurekaMovieBE.Persistence.UnitOfWorks
         public TmdbUnitOfWork(TmdbDbContext context)
         {
             _context = context;
-            MovieGenre = new MovieGenreRepository(context);
-            MovieNowPlaying = new MovieNowPlayingRepository(context);
-            Movie = new MovieRepository(context);
-            MoviePopular = new MoviePopularRepository(context);
-            MovieTopRated = new MovieTopRatedRepository(context);
-            MovieTrendingDay = new MovieTrendingDayRepository(context);
-            MovieTrendingWeek = new MovieTrendingWeekRepository(context);
-            People = new PeopleRepository(context);
-            Similar = new SimilarRepository(context);
+            MovieGenre = new MovieGenreRepository(context, CollectionNameConstants.MovieGenres);
+            MovieNowPlaying = new MovieNowPlayingRepository(context, CollectionNameConstants.MoviesNowPlaying);
+            Movie = new MovieRepository(context, CollectionNameConstants.Movies);
+            MoviePopular = new MoviePopularRepository(context, CollectionNameConstants.MoviesPopular);
+            MovieTopRated = new MovieTopRatedRepository(context, CollectionNameConstants.MoviesTopRated);
+            MovieTrendingDay = new MovieTrendingDayRepository(context, CollectionNameConstants.MoviesTrendingDay);
+            MovieTrendingWeek = new MovieTrendingWeekRepository(context, CollectionNameConstants.MoviesTrendingWeek);
+            People = new PeopleRepository(context, CollectionNameConstants.People);
+            Similar = new SimilarRepository(context, CollectionNameConstants.Similar);
         }
     }
 }

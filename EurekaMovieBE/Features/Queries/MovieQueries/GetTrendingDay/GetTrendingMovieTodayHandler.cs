@@ -14,26 +14,26 @@ public class GetTrendingMovieTodayHandler : IRequestHandler<GetTrendingMovieToda
         _unitOfRepository = unitOfRepository;
         _logger = logger;
     }
-    
+
     public async Task<GetTrendingMovieTodayResponse> Handle(GetTrendingMovieTodayQuery request, CancellationToken cancellationToken)
     {
         var payload = request.Payload;
         const string functionName = $"{nameof(GetTrendingMovieTodayHandler)} =>";
         _logger.LogInformation(functionName);
-        
-        var response = new GetTrendingMovieTodayResponse{ Status = (int)ResponseStatusCode.Ok };
+
+        var response = new GetTrendingMovieTodayResponse { Status = (int)ResponseStatusCode.Ok };
 
         try
         {
             var movies = await _unitOfRepository.MovieTrendingDay
                 .GetAll()
-                .OrderByDescending(x => x.VoteAverage)
+                .Sort(Builders<MovieTrendingDay>.Sort.Descending(x => x.VoteAverage))
                 .ToListAsPageAsync(payload.PageNumber, payload.MaxPerPage, cancellationToken);
-           
+
             response.Data = movies.Data;
             response.Paging = movies.Paging;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _logger.LogError(ex, $"{functionName} Has error: {ex.Message}");
             response.ErrorMessage = "An error occurred";

@@ -153,7 +153,7 @@ namespace EurekaMovieBE.Extensions
         {
             services.AddSwaggerGen(opt =>
             {
-                opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieStreamingApi", Version = "v1" });
+                opt.SwaggerDoc("v1", new OpenApiInfo { Title = "EurekaMovieBE", Version = "v1" });
                 opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,

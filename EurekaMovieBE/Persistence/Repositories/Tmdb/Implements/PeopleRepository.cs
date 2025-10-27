@@ -2,7 +2,7 @@
 {
     public class PeopleRepository : MongoGenericRepository<People>, IPeopleRepository
     {
-        public PeopleRepository(TmdbDbContext context) : base(context)
+        public PeopleRepository(TmdbDbContext context, string collectionName) : base(context, collectionName)
         {
         }
     }
