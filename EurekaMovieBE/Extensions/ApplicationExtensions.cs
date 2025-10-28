@@ -1,9 +1,12 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Services;
+using EurekaMovieBE.Features.Commands.UserCommands.Register;
+using EurekaMovieBE.Features.Commands.UserCommands.Register.PostProcessor;
 using EurekaMovieBE.Middlewares;
 using EurekaMovieBE.Services.DuendeServices;
 using EurekaMovieBE.Validation;
 using FluentValidation;
+using MediatR.Pipeline;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
@@ -129,9 +132,14 @@ namespace EurekaMovieBE.Extensions
         {
             services.AddMediatR(cfg =>
             {
-                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+                cfg.AutoRegisterRequestProcessors = true;
+                cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
             });
+
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
+
             return services;
         }
 

@@ -2,8 +2,8 @@
 {
     public class IdentityResourceConstants
     {
-        public const string ClientId = "moviestreaming";
-        public const string ClientScope = "MovieStreamingAPI";
+        public const string ClientId = "eurekamoviebe";
+        public const string ClientScope = "EurekaMovieBEAPI";
         public const string PasswordDefault = "Default123";
     }
 }

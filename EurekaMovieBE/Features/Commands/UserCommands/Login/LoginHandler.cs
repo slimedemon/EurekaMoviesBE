@@ -89,7 +89,7 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse>
             {
                 Address = $"{_authenticationOptions.Authority}/connect/token",
                 ClientId = client.ClientId,
-                ClientSecret = client.Secrets.FirstOrDefault(),
+                ClientSecret = "secret123456",
                 Scope = requestScopes.Trim(),
                 UserName = payload.Email,
                 Password = payload.Password

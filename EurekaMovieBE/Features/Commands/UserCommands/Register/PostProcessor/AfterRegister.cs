@@ -23,6 +23,9 @@ public class AfterRegister : IRequestPostProcessor<RegisterCommand, RegisterResp
     }
     public async Task Process(RegisterCommand request, RegisterResponse response, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("AfterRegister PostProcessor ENTER. Email={Email}, Status={Status}, IsSocial={IsSocial}", 
+            request.Payload?.Email, response.Status, request.IsSocial);
+
         const string functionName = $"{nameof(AfterRegister)} =>";
 
         try
@@ -32,7 +35,7 @@ public class AfterRegister : IRequestPostProcessor<RegisterCommand, RegisterResp
                 var payload = request.Payload;
                 var newUser = response.User;
                 var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-                await _mailSenderService.SendRegistrationEmail(newUser.UserName, confirmationToken, payload.DisplayName);
+                await _mailSenderService.SendRegistrationEmail(newUser.UserName!, confirmationToken, payload!.DisplayName);
             }
         }
         catch(Exception ex)

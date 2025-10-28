@@ -1,3 +1,5 @@
+using Duende.IdentityServer.EntityFramework.DbContexts;
+using EurekaMovieBE.Data.Seeder;
 using EurekaMovieBE.Extensions;
 using EurekaMovieBE.HttpClientCustom;
 using EurekaMovieBE.Middlewares;
@@ -82,6 +84,13 @@ namespace EurekaMovieBE
             app.UseAuthorization();
 
             app.MapControllers();
+
+            // Seed database
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                IdentityServerSeeder.Seed(context);
+            }
 
             app.Run();
         }

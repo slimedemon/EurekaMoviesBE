@@ -27,7 +27,7 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
         try
         {
             var user = await _unitOfRepository.User
-                .Where(u => u.UserName.ToLower().Equals(payload.Email.ToLower()))
+                .Where(u => u.UserName!.ToLower().Equals(payload.Email.ToLower()))
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
             if (user != null)
