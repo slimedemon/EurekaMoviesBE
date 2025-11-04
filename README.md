@@ -1,6 +1,6 @@
 > This project is a clone of Eureka-Movies-BE (https://github.com/git03-Nguyen/Eureka-Movies-BE).
 
-# MovieStreaming Backend 🎬
+# EurekaMoviesBE 🎬
 
 **Frontend:** [Eureka-Movies-FE](https://github.com/nhantrnh/Eureka-Movies-FE)  
 **Team Members:**  
@@ -9,7 +9,7 @@
 - 21120105 – Trương Thành Nhân  
 
 ## 🧭 Overview
-**MovieStreaming** is a backend for an AI-powered movie streaming platform built with **ASP.NET Core**.  
+**EurekaMoviesBE** is a backend for an AI-powered movie streaming platform built with **ASP.NET Core**.  
 It supports **OAuth2/OIDC authentication**, **AI recommendations**, and **multi-database integration** using **PostgreSQL** and **MongoDB**.
 
 ## 🚀 Features
