@@ -1,0 +1,6 @@
+@EurekaMoviesBE_HostAddress = http://localhost:5128
+
+GET {{EurekaMoviesBE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

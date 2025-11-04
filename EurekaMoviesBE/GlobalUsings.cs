@@ -1,0 +1,35 @@
+﻿global using EurekaMoviesBE.Data.Configurations;
+global using EurekaMoviesBE.Entities.Auth;
+global using EurekaMoviesBE.Entities.UserActions;
+global using EurekaMoviesBE.Options;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Options;
+global using EurekaMoviesBE.Entities.Tmdb;
+global using MongoDB.Driver;
+global using MongoDB.EntityFrameworkCore.Extensions;
+global using Microsoft.AspNetCore.Identity;
+global using MongoDB.Bson;
+global using MongoDB.Bson.Serialization;
+global using MongoDB.Bson.Serialization.Attributes;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using EurekaMoviesBE.Data;
+global using EurekaMoviesBE.Persistence.Repositories.Tmdb.Interfaces;
+global using EurekaMoviesBE.Persistence.Repositories.Application.Interfaces;
+global using System.Linq.Expressions;
+global using EurekaMoviesBE.Persistence.UnitOfWorks;
+global using EurekaMoviesBE.Constants;
+global using EurekaMoviesBE.Templates;
+global using MediatR;
+global using EurekaMoviesBE.Dtos;
+global using EurekaMoviesBE.Dtos.Requests;
+global using EurekaMoviesBE.Dtos.Responses;
+global using EurekaMoviesBE.Enums;
+global using EurekaMoviesBE.Extensions;
+global using EurekaMoviesBE.HttpClientCustom;
+global using EurekaMoviesBE.HttpContextCustom;
+global using EurekaMoviesBE.Services;
+global using EurekaMoviesBE.Helpers;
+
+

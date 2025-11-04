@@ -1,0 +1,19 @@
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace EurekaMoviesBE.Data.Configurations
+{
+    public class WatchListConfiguration : IEntityTypeConfiguration<WatchList>
+    {
+        public void Configure(EntityTypeBuilder<WatchList> builder)
+        {
+            builder.ToTable(nameof(WatchList));
+            builder.Property(x => x.Index).ValueGeneratedOnAdd();
+            builder.Property(x => x.CreatedDate)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp with time zone");
+            builder.HasOne(x => x.UserInfo)
+                .WithMany(x => x.WatchLists)
+                .HasForeignKey(x => x.UserId);
+        }
+    }
+}
