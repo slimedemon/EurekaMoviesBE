@@ -5,7 +5,7 @@
 **Frontend:** [Eureka-Movies-FE](https://github.com/nhantrnh/Eureka-Movies-FE)  
 **Team Members:**  
 - 21120172 – Nguyễn Tuấn Đạt  
-- 21120172 – Nguyễn Đình Ánh  
+- 21120171 – Nguyễn Đình Ánh  
 - 21120105 – Trương Thành Nhân  
 
 ## 🧭 Overview
